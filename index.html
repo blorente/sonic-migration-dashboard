@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SONiC: Bazel Migration Dashboard</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <main class="container">
+    <header class="masthead">
+      <img class="sonic-logo" src="assets/sonic.png" alt="SONiC" width="225" height="96">
+      <hgroup class="masthead-text">
+        <h1>Bazel Migration Dashboard</h1>
+        <p>Tracking the Bazel migration of SONiC.
+          For more info, read the <a href="https://github.com/sonic-net/SONiC/pull/2396" target="_blank"
+            rel="noopener">HLD</a>.</p>
+      </hgroup>
+    </header>
+
+    <section class="summary" id="summary" aria-label="Migration progress summary"></section>
+
+    <!-- List.js container: the .search input and the .list tbody must live inside this element. -->
+    <div id="migration">
+      <input class="search" type="search" placeholder="Search by component or status…"
+        aria-label="Search components by name or status">
+      <p class="result-count" id="result-count" aria-live="polite"></p>
+
+      <div class="table-scroll">
+        <table id="migration-table">
+          <thead>
+            <tr>
+              <th scope="col">Component</th>
+              <th scope="col">Rules</th>
+              <th scope="col">Status</th>
+              <th scope="col">PR</th>
+              <th scope="col">Contributor</th>
+              <th scope="col">Company</th>
+              <th scope="col">Notes</th>
+            </tr>
+          </thead>
+          <tbody id="rows" class="list"></tbody>
+        </table>
+      </div>
+
+      <p class="empty-state" id="empty-state" hidden>No components match your search.</p>
+    </div>
+  </main>
+
+  <!-- Must load before render.js, which initializes it. -->
+  <script src="https://cdn.jsdelivr.net/npm/list.js@2/dist/list.min.js"></script>
+  <script src="data.js"></script>
+  <script src="render.js"></script>
+</body>
+
+</html>

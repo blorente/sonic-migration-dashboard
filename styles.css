@@ -1,0 +1,218 @@
+/* Dashboard styles — layered on top of Pico CSS. */
+
+:root {
+  --pico-font-size: 100%;
+
+  --status-not-started: #9e9e9e;
+  --status-bazel-only: #43a047;
+  --status-bazel-make: rgb(67 160 71 / 20%);
+
+  --bar-not-started: #3a4150;
+  --bar-bazel-make: var(--status-bazel-make);
+  --bar-bazel-only: var(--status-bazel-only);
+  --bar-outline: #39404f;
+}
+
+header.masthead {
+  margin-block: 2rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+/* Takes the free space, so the logo hugs whichever edge it is placed on. */
+header.masthead .masthead-text {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+header.masthead hgroup p {
+  margin-bottom: 0;
+}
+
+.sonic-logo {
+  height: 3rem;
+  width: auto;
+  flex-shrink: 0;
+  /* never squash the logo to fit the title */
+}
+
+/* --- Search (List.js) --- */
+#migration .search {
+  margin-bottom: .5rem;
+}
+
+.result-count {
+  font-size: .85rem;
+  color: var(--pico-muted-color);
+  margin-bottom: .75rem;
+}
+
+.empty-state {
+  margin-top: 1rem;
+  color: var(--pico-muted-color);
+  font-style: italic;
+}
+
+/* --- Summary: count row + progress bar --- */
+.summary {
+  margin-bottom: 2rem;
+}
+
+.counts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem 1.25rem;
+  align-items: center;
+  margin-bottom: .75rem;
+  font-weight: 600;
+}
+
+.counts .count {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+}
+
+.counts .swatch {
+  width: .8rem;
+  height: .8rem;
+  border-radius: 3px;
+  display: inline-block;
+  border: 1px solid transparent;
+}
+
+/* Composition bar: segments sized by raw count, no weighting. */
+.summary .progress-bar {
+  display: flex;
+  height: .75rem;
+  border-radius: 999px;
+  overflow: hidden;
+  /* clips end segments to the rounded ends */
+  outline: 1px solid var(--bar-outline);
+  outline-offset: -1px;
+  /* hairline edge so segments read against the page */
+  margin-bottom: 0;
+}
+
+/* Floor so a single component (1 of 177) never rounds away to nothing. */
+.summary .progress-bar .seg {
+  min-width: 2px;
+}
+
+.seg.not-started {
+  background: var(--bar-not-started);
+}
+
+.seg.bazel-make {
+  background: var(--bar-bazel-make);
+}
+
+.seg.bazel-only {
+  background: var(--bar-bazel-only);
+}
+
+/* --- Status colours (shared by swatches + pills); greens are from the Bazel logo palette. --- */
+.swatch.not-started,
+.pill.not-started {
+  background: var(--status-not-started);
+}
+
+.swatch.bazel-only,
+.pill.bazel-only {
+  background: var(--status-bazel-only);
+}
+
+/* Bazel+Make: translucent fill of the Bazel-only green, outlined in it solid. */
+.swatch.bazel-make,
+.pill.bazel-make {
+  background: var(--status-bazel-make);
+  border-color: var(--status-bazel-only);
+}
+
+/* --- Status pill --- */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  padding: .2rem .6rem;
+  border: 1px solid transparent;
+  /* keeps every pill the same height as the outlined one */
+  border-radius: 999px;
+  color: #fff;
+  font-size: .8rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.pill .logo {
+  height: 1rem;
+  width: auto;
+  display: block;
+}
+
+.pill .logos {
+  display: inline-flex;
+  gap: .25rem;
+}
+
+/* --- Company logo cell --- */
+.company {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+}
+
+.company img {
+  height: 1.25rem;
+  width: auto;
+  display: block;
+}
+
+.company .name-fallback {
+  font-size: .85rem;
+}
+
+a.company-link {
+  text-decoration: none;
+}
+
+td.component {
+  font-family: var(--pico-font-family-monospace);
+  white-space: nowrap;
+}
+
+td.rules {
+  font-family: var(--pico-font-family-monospace);
+  white-space: nowrap;
+  font-size: .85rem;
+  color: var(--pico-muted-color);
+}
+
+td.notes {
+  color: var(--pico-muted-color);
+  font-size: .9rem;
+}
+
+.table-scroll {
+  overflow-x: auto;
+}
+
+a.pr-link {
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+}
+
+.pr-icon {
+  height: 1rem;
+  width: 1rem;
+  flex-shrink: 0;
+  display: block;
+}
+
+a.contributor-link {
+  white-space: nowrap;
+}
